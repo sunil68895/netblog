@@ -6,7 +6,7 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
   const { state, dispatch } = useContext(UserContext);
   useEffect(() => {
-    fetch("/getsubscribeposts", {
+    fetch("https://netblog-rest-server.herokuapp.com/getsubscribeposts", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -17,7 +17,7 @@ export default function Home() {
       });
   }, []);
   const likePost = (_id) => {
-    fetch("/like", {
+    fetch("https://netblog-rest-server.herokuapp.com/like", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export default function Home() {
       });
   };
   const unlikePost = (_id) => {
-    fetch("/unlike", {
+    fetch("https://netblog-rest-server.herokuapp.com/unlike", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export default function Home() {
   };
 
   const makeComment = (text, postId) => {
-    fetch("/comment", {
+    fetch("https://netblog-rest-server.herokuapp.com/comment", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export default function Home() {
       });
   };
   const deletePost = (postId) => {
-    fetch(`/deletepost/${postId}`, {
+    fetch(`https://netblog-rest-server.herokuapp.com/deletepost/${postId}`, {
       method: "delete",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
