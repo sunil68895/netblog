@@ -46,7 +46,7 @@ export default function Signup() {
         classes: "#c62828 red darken-3",
       });
     }
-    fetch("/signup", {
+    fetch("https://netblog-rest-server.herokuapp.com/signup", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
