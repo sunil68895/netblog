@@ -11,7 +11,7 @@ export default function CreatePost() {
 
   useEffect(() => {
     if (url) {
-      fetch("/createpost", {
+      fetch("https://netblog-rest-server.herokuapp.com/createpost", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
