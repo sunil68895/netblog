@@ -6,7 +6,7 @@ export default function Profile() {
   const [url, setUrl] = useState("");
   const { state, dispatch } = useContext(UserContext);
   useEffect(() => {
-    fetch("/myposts", {
+    fetch("https://netblog-rest-server.herokuapp.com/myposts", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -29,7 +29,7 @@ export default function Profile() {
       })
         .then((res) => res.json())
         .then((data) => {
-          fetch("/updatepic", {
+          fetch("https://netblog-rest-server.herokuapp.com/updatepic", {
             method: "put",
             headers: {
               "Content-Type": "application/json",
