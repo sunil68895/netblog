@@ -22,7 +22,7 @@ export default function Signin() {
         classes: "#c62828 red darken-3",
       });
     }
-    fetch("/signin", {
+    fetch("https://netblog-rest-server.herokuapp.com/signin", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
