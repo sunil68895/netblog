@@ -7,7 +7,7 @@ export default function Profile() {
   const { userid } = useParams();
   console.log(userid);
   useEffect(() => {
-    fetch(`/user/${userid}`, {
+    fetch(`https://netblog-rest-server.herokuapp.com/user/${userid}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -20,7 +20,7 @@ export default function Profile() {
   }, []);
 
   const followUser = () => {
-    fetch("/follow", {
+    fetch("https://netblog-rest-server.herokuapp.com/follow", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +51,7 @@ export default function Profile() {
   };
 
   const unfollowUser = () => {
-    fetch("/unfollow", {
+    fetch("https://netblog-rest-server.herokuapp.com/unfollow", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
