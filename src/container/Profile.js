@@ -30,7 +30,7 @@ export default function Profile() {
       })
         .then((res) => res.json())
         .then((data) => {
-          fetch("/updatepic", {
+          fetch("https://netblog-rest-server.herokuapp.com/updatepic", {
             method: "put",
             headers: {
               "Content-Type": "application/json",
