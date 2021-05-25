@@ -19,19 +19,30 @@ a {
   margin: 20px auto
 }
 
+.card-image{
+  max-height:350px;
+   max-width:350px;
+   display:flex;
+    margin:auto;
+}
+
+.input-field label {
+  color: #fff;
+}
+
 .input-field input[type=text]:focus {
-  border-bottom: 1px solid rgb(8, 93, 252) !important;
-  box-shadow: 0 1px 0 0 rgb(8, 93, 252) i !important;
+  border-bottom: 1px solid #f48fb1 !important;
+  box-shadow: 0 1px 0 0 #f48fb1 i !important;
 }
 .input-field input[type=password]:focus {
-  border-bottom: 1px solid rgb(8, 93, 252) !important;
-  box-shadow: 0 1px 0 0 rgb(8, 93, 252) i !important;
+  border-bottom: 1px solid #f48fb1 !important;
+  box-shadow: 0 1px 0 0 #f48fb1 i !important;
 }
 
 .gallery {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+ 
 }
 
 .item {
@@ -49,4 +60,8 @@ a {
   top:60px !important;
   right: 20px !important;
   left:auto !important
+}
+
+.root{
+  background-color: black;
 }

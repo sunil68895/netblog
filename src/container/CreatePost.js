@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import M from "materialize-css";
+import {API} from '../helper/Keys.js'
 export default function CreatePost() {
   const history = useHistory();
 
@@ -11,7 +12,7 @@ export default function CreatePost() {
 
   useEffect(() => {
     if (url) {
-      fetch("/createpost", {
+      fetch(`${API}/createpost`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -62,6 +63,7 @@ export default function CreatePost() {
   };
 
   return (
+    <div style={{height:`${window.innerHeight-110}px`}}>
     <div
       className="card input-field"
       style={{
@@ -84,7 +86,7 @@ export default function CreatePost() {
         onChange={(e) => setBody(e.target.value)}
       />
       <div className="file-field input-field">
-        <div className="btn waves-effect waves-light #e040fb purple accent-2">
+        <div className="btn waves-effect waves-light ">
           <span>Upload Image</span>
           <input type="file" onChange={(e) => setImage(e.target.files[0])} />
         </div>
@@ -93,11 +95,12 @@ export default function CreatePost() {
         </div>
       </div>
       <button
-        className="btn waves-effect waves-light #e040fb purple accent-2 "
+        className="btn waves-effect waves-light "
         onClick={() => postDetails()}
       >
         Create Post
       </button>
+    </div>
     </div>
   );
 }

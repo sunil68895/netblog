@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "../App";
+import {API} from '../helper/Keys.js'
 export default function Profile() {
   const [myposts, setMyPosts] = useState([]);
   const [image, setImage] = useState("");
   const [url, setUrl] = useState("");
   const { state, dispatch } = useContext(UserContext);
   useEffect(() => {
-    fetch("/myposts", {
+    fetch(`${API}/myposts`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -62,7 +63,9 @@ export default function Profile() {
   };
 
   return state ? (
-    <div style={{ maxWidth: "700px", margin: "10px auto" }}>
+    <div style={{height:`${window.innerHeight-80}px`}}>
+    <div style={{backgroundColor:'#f48fb1' }}>
+    <div style={{ maxWidth: "700px",margin: "10px auto" }}>
       <div
         style={{
           display: "flex",
@@ -78,21 +81,21 @@ export default function Profile() {
             alt=""
           />
         </div>
-        <div className="file-field input-field">
-          <div className="btn waves-effect waves-light #e040fb purple accent-2">
+        <div className="file-field input-field" style={{margin:'auto 0px'}}>
+          <div className="btn waves-effect waves-light ">
             <span>UPDATE PIC</span>
-            <input
-              type="file"
-              onChange={(e) => updatePhoto(e.target.files[0])}
+            <div style={{color:'white'}}>
+            <input 
+            type="file"
+            onChange={(e) => updatePhoto(e.target.files[0])}
             />
+            </div>
           </div>
-          <div className="file-path-wrapper">
-            <input className="file-path validate" type="text" />
-          </div>
+            
         </div>
 
-        <div>
-          <h5>{state.name}</h5>
+        <div style={{color:'#880e4f'}}>
+          <h4>{state.name}</h4>
           <h6>{state.email}</h6>
           <div
             style={{
@@ -107,10 +110,15 @@ export default function Profile() {
           </div>
         </div>
       </div>
-      <div className="gallery">
+      <div style={{display:'flex', justifyContent:'center'}}>
+      <i class="material-icons" style={{margin:'auto 2px',color:"#880e4f"}}>grid_on</i>
+      <h6 style={{fontWeight:'bolder',color:'#880e4f'}}>Posts </h6>
+      
+      </div>
+      <div className="gallery" style={{backgroundColor:"#f48fb1"}}>
         {myposts.map((post, index) => {
           return (
-            <img
+            <img classname="card-image" style={{margin:'10px'}}
               key={index}
               className="item"
               src={post.photo}
@@ -120,7 +128,9 @@ export default function Profile() {
         })}
       </div>
     </div>
-  ) : (
+   </div>
+   </div>
+    ) : (
     <h5>loading...</h5>
   );
 }

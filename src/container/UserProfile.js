@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../App";
+import {API} from '../helper/Keys.js'
 export default function Profile() {
   const [userProfile, setUserProfile] = useState(null);
   const { state, dispatch } = useContext(UserContext);
   const { userid } = useParams();
   console.log(userid);
   useEffect(() => {
-    fetch(`/user/${userid}`, {
+    fetch(`${API}/user/${userid}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -20,7 +21,7 @@ export default function Profile() {
   }, []);
 
   const followUser = () => {
-    fetch("/follow", {
+    fetch(`${API}/follow`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +52,7 @@ export default function Profile() {
   };
 
   const unfollowUser = () => {
-    fetch("/unfollow", {
+    fetch(`${API}/unfollow`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -85,65 +86,75 @@ export default function Profile() {
   };
 
   return userProfile ? (
-    <div style={{ maxWidth: "700px", margin: "10px auto" }}>
+    <div style={{ height: `${window.innerHeight - 80}px` }}>
       <div
         style={{
-          display: "flex",
-          justifyContent: "space-around",
-          margin: "18px 0",
-          borderBottom: "1px solid grey",
+          maxWidth: "700px",
+          margin: "10px auto",
+          backgroundColor: "#f48fb1",
         }}
       >
-        <div>
-          <img
-            style={{ width: "160px", height: "160px", borderRadius: "80px" }}
-            src={userProfile.user.profilePicture}
-            alt=""
-          />
-        </div>
-        <div>
-          <h4>{userProfile.user.name}</h4>
-          <h6>{userProfile.user.email}</h6>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "108%",
-            }}
-          >
-            <h6>{userProfile.posts.length} posts</h6>
-            <h6>{userProfile.user.followers.length} followers</h6>
-            <h6>{userProfile.user.following.length} following</h6>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            margin: "18px 0",
+            borderBottom: "1px solid grey",
+          }}
+        >
+          <div>
+            <img
+              style={{ width: "160px", height: "160px", borderRadius: "80px" }}
+              src={userProfile.user.profilePicture}
+              alt=""
+            />
           </div>
-
+          <div style={{margin:'auto 0px'}}>
           {!userProfile.user.followers.includes(state._id) ? (
             <button
-              className="btn waves-effect waves-light #e040fb purple accent-2 "
-              onClick={() => followUser()}
+            className="btn waves-effect waves-light  "
+            onClick={() => followUser()}
             >
-              follow
+            follow
             </button>
-          ) : (
-            <button
-              className="btn waves-effect waves-light #e040fb purple accent-2 "
+            ) : (
+              <button
+              className="btn waves-effect waves-light"
               onClick={() => unfollowUser()}
-            >
+              >
               unfollow
-            </button>
-          )}
+              </button>
+              )}
+              </div>
+              <div style={{color:'#880e4f'}}>
+            <h4>{userProfile.user.name}</h4>
+            <h6>{userProfile.user.email}</h6>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "108%",
+              }}
+            >
+              <h6>{userProfile.posts.length} posts</h6>
+              <h6>{userProfile.user.followers.length} followers</h6>
+              <h6>{userProfile.user.following.length} following</h6>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="gallery">
-        {userProfile.posts.map((post, index) => {
-          return (
-            <img
-              key={index}
-              className="item"
-              src={post.photo}
-              alt={post.title}
-            />
-          );
-        })}
+        <div className="gallery">
+          {userProfile.posts.map((post, index) => {
+            return (
+              <img
+              style={{margin:'10px'}}
+                key={index}
+                className="item"
+                src={post.photo}
+                alt={post.title}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   ) : (

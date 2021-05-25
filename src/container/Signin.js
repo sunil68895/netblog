@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import M from "materialize-css";
 import { UserContext } from "../App";
+import {API} from '../helper/Keys.js'
 
 export default function Signin() {
   const {state, dispatch} = useContext(UserContext);
@@ -22,7 +23,7 @@ export default function Signin() {
         classes: "#c62828 red darken-3",
       });
     }
-    fetch("/signin", {
+    fetch(`${API}/signin`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -54,9 +55,11 @@ export default function Signin() {
   };
 
   return (
+    <div style={{height:`${window.innerHeight-140}px`}}>
+    
     <div className="mycard">
-      <div className="card auth-card input-field">
-        <h2>NetBlog</h2>
+      <div className="card auth-card input-field" style={{borderRadius:'20px'}}>
+        <h2 style={{color:'#ad1457'}}>NetBlog</h2>
         <input
           type="text"
           placeholder="email"
@@ -70,15 +73,16 @@ export default function Signin() {
           onChange={(e) => SetPassword(e.target.value)}
         />
         <button
-          className="btn waves-effect waves-light #e040fb purple accent-2 "
+          className="btn waves-effect waves-light "
           onClick={() => PostData()}
         >
           Login
         </button>
         <h6>
-          <Link to="/signup">Don't have an account</Link>
+          <Link to="/signup"><div style={{color:'#ad1457'}}>Don't have an account</div></Link>
         </h6>
       </div>
     </div>
-  );
+    </div>
+    );
 }

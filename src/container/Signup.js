@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import M from "materialize-css";
+import {API} from '../helper/Keys.js'
 
 export default function Signup() {
   const history = useHistory();
@@ -46,7 +47,7 @@ export default function Signup() {
         classes: "#c62828 red darken-3",
       });
     }
-    fetch("/signup", {
+    fetch(`${API}/signup`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -84,45 +85,53 @@ export default function Signup() {
   };
 
   return (
-    <div className="mycard">
-      <div className="card auth-card input-field">
-        <h2>NetBlog</h2>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => SetName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="email"
-          value={email}
-          onChange={(e) => SetEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => SetPassword(e.target.value)}
-        />
-        <div className="file-field input-field">
-          <div className="btn waves-effect waves-light #e040fb purple accent-2">
-            <span>Upload Image</span>
-            <input type="file" onChange={(e) => setImage(e.target.files[0])} />
-          </div>
-          <div className="file-path-wrapper">
-            <input className="file-path validate" type="text" />
-          </div>
-        </div>
-        <button
-          className="btn waves-effect waves-light #e040fb purple accent-2 "
-          onClick={() => PostData()}
+    <div style={{ height: `${window.innerHeight - 140}px` }}>
+      <div className="mycard">
+        <div
+          className="card auth-card input-field"
+          style={{ borderRadius: "20px" }}
         >
-          Signup
-        </button>
-        <h6>
-          <Link to="/signin">Already have an account</Link>
-        </h6>
+          <h2 style={{ color: "#ad1457" }}>NetBlog</h2>
+          <input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => SetName(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="email"
+            value={email}
+            onChange={(e) => SetEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => SetPassword(e.target.value)}
+          />
+          <div className="file-field input-field">
+            <div className="btn waves-effect waves-light ">
+              <span>Upload Image</span>
+              <input
+                type="file"
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+            </div>
+            <div className="file-path-wrapper">
+              <input className="file-path validate" type="text" />
+            </div>
+          </div>
+          <button
+            className="btn waves-effect waves-light "
+            onClick={() => PostData()}
+          >
+            Signup
+          </button>
+          <h6>
+            <Link to="/signin"><div style={{color:'#ad1457'}}>Already have an account</div></Link>
+          </h6>
+        </div>
       </div>
     </div>
   );
